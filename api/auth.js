@@ -421,6 +421,13 @@ export default async function handler(req, res) {
             .createHmac("sha256", SECRET)
             .update(`${device}|${timestamp}|${nonce}`)
             .digest("base64");
+        console.log("[AUTH][SIGNATURE_DEBUG]", {
+            device,
+            timestamp,
+            nonce,
+            receivedSignature: signature,
+            expectedSignature: expected
+        });
 
         try {
             if (
