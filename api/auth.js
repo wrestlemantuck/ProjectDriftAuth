@@ -9,6 +9,7 @@ const ALLOWED_APK_SIGNATURES = new Set([
 
 const REQUIRED_PACKAGE       = process.env.REQUIRED_PACKAGE_NAME;
 const MIN_VERSION            = process.env.MIN_APP_VERSION ?? null;
+const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 const EXPECTED_ASSET_HASH    = process.env.EXPECTED_ASSET_HASH ?? null;
 const EXPECTED_METADATA_HASH = process.env.EXPECTED_METADATA_HASH ?? null;
 const EXPECTED_RAWMAPS_HASH  = process.env.EXPECTED_RAWMAPS_HASH ?? null;
