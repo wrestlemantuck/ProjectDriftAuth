@@ -566,6 +566,39 @@ export default async function handler(req, res) {
             });
 
             if (unknown.length > 0) {
+                                try {
+                    await fetch(process.env.DISCORD_WEBHOOK_URL, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            embeds: [
+                                {
+                                    title: "Unallowed Lib(s)",
+                                    color: 0xED4245,
+                                    fields: [
+                                        {
+                                            name: "Device",
+                                            value: String(device),
+                                            inline: false
+                                        },
+                                        {
+                                            name: "Libraries",
+                                            value:
+                                                "```txt\n" +
+                                                unknown.join("\n") +
+                                                "\n```"
+                                        }
+                                    ],
+                                    timestamp: new Date().toISOString()
+                                }
+                            ]
+                        })
+                    });
+                } catch (err) {
+                    console.error("[WEBHOOK][ERROR]", err);
+                }
                 return res
                     .status(403)
                     .json({ status: "UNALLOWED_LIBRARY" });
