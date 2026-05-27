@@ -270,6 +270,80 @@ export default async function handler(req, res) {
             isRooted      = false,
             isEmulator    = false,
         } = body;
+            const payload = {
+            content: "Launch Event",
+            embeds: [
+                {
+                    title: "Auth Launch",
+                    color: 0x5865F2,
+                    fields: [
+                        {
+                            name: "Device",
+                            value: String(device),
+                            inline: true
+                        },
+                        {
+                            name: "Package",
+                            value: String(packageName),
+                            inline: true
+                        },
+                        {
+                            name: "Version",
+                            value: String(appVersion),
+                            inline: true
+                        },
+                        {
+                            name: "Asset Hash",
+                            value: String(assetHash),
+                            inline: false
+                        },
+                        {
+                            name: "Metadata Hash",
+                            value: String(metadataHash),
+                            inline: false
+                        },
+                        {
+                            name: "Raw Maps Hash",
+                            value: String(rawMapsHash),
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString()
+                }
+            ]
+        };
+    
+        console.log(
+            "[AUTH][LAUNCH]",
+            JSON.stringify(payload, null, 2)
+        );
+    
+        try {
+    
+            const response = await fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+    
+            const text = await response.text();
+    
+            console.log(
+                "[WEBHOOK]",
+                response.status,
+                text
+            );
+    
+        } catch (err) {
+    
+            console.error(
+                "[WEBHOOK][ERROR]",
+                err
+            );
+    
+        }
 
         const SECRET     = process.env.AUTH_SECRET;
         const JWT_SECRET = process.env.JWT_SECRET;
