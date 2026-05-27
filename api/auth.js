@@ -473,6 +473,16 @@ export default async function handler(req, res) {
         }
 
         // ── APK signature ───────────────────────────────────────────────────
+        const debugData = {
+            device,
+            apkSig,
+            allowed: Array.from(ALLOWED_APK_SIGNATURES),
+            match: apkSig
+                ? ALLOWED_APK_SIGNATURES.has(apkSig.toLowerCase())
+                : false
+        };
+        
+        console.log("[AUTH][APK_SIG_DEBUG]", debugData);
 
         if (ALLOWED_APK_SIGNATURES.size === 0) {
             return res
