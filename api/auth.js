@@ -27,7 +27,7 @@ const ALLOWED_INSTALLERS = new Set([
 
 const ALLOWED_LIBS = new Set([
     "libc.so","libm.so","libdl.so","libdl_android.so","libz.so","liblog.so", "libllvm-qgl.so",
-    "libpthread.so","libstdc++.so","libc++.so","libc++_shared.so","libatomic.so",
+    "libpthread.so","libstdc++.so","libc++.so","libc++_shared.so","libatomic.so", "libsdktelemetry.so",
     "libgcc.so","libgcc_s.so","librt.so","libcompiler_rt.so","libnetd_client.so",
     "libpcre2.so","libexpat.so","libffi.so","libicuuc.so","libicui18n.so","libicu.so",
     "libicu_jni.so","libandroidicu.so","libziparchive.so","liblzma.so","liblz4.so",
